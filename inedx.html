@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>יעקב טלבי – שיעורים פרטיים וטכנולוגיה</title>
+  <meta name="description" content="שיעורים פרטיים במתמטיקה, מחשבים ואלקטרוניקה, וסדנאות טכנולוגיות מעשיות בתחומי הלחמה, רחפנים, Arduino ותכנות.">
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #1d4ed8;
+      --accent2: #0f766e;
+      --border: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, "Noto Sans Hebrew", sans-serif;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(29, 78, 216, 0.10) 0, transparent 28%),
+        radial-gradient(circle at 88% 12%, rgba(15, 118, 110, 0.09) 0, transparent 26%),
+        linear-gradient(135deg, rgba(255,255,255,0.82) 0%, rgba(245,247,251,0.94) 45%, rgba(236,244,255,0.92) 100%),
+        repeating-linear-gradient(45deg, rgba(29,78,216,0.025) 0, rgba(29,78,216,0.025) 1px, transparent 1px, transparent 18px);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(232, 241, 255, 0.96) 0%, rgba(241, 248, 247, 0.94) 100%);
+      border: 1px solid #dbe4f0;
+      border-radius: 28px;
+      padding: 34px 26px;
+      box-shadow: 0 18px 50px rgba(31, 41, 55, .08);
+      text-align: center;
+      margin-top: 18px;
+      backdrop-filter: blur(6px);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .badge {
+      display: inline-block;
+      color: var(--accent);
+      background: #dbeafe;
+      border: 1px solid #bfdbfe;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(32px, 6vw, 52px);
+      line-height: 1.15;
+      color: #111827;
+    }
+    .subtitle {
+      font-size: 20px;
+      margin: 0 auto 24px;
+      max-width: 720px;
+      color: #374151;
+    }
+    .cta-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .btn {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(31, 41, 55, .10);
+    }
+    .btn.primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .btn.green {
+      background: var(--accent2);
+      color: white;
+      border-color: var(--accent2);
+    }
+    .section {
+      margin-top: 22px;
+      background: linear-gradient(180deg, rgba(246, 250, 255, 0.96) 0%, rgba(239, 247, 245, 0.94) 100%);
+      border: 1px solid #dde7ef;
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 10px 30px rgba(31, 41, 55, .05);
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      color: #111827;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+    .service {
+      border: 1px solid #dfe8f2;
+      border-radius: 20px;
+      padding: 18px;
+      background: linear-gradient(180deg, #f4f9ff 0%, #eef7f5 100%);
+    }
+    .service h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    ul {
+      margin: 10px 0 0;
+      padding-right: 20px;
+    }
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .step {
+      border: 1px solid #dfe8f2;
+      border-radius: 18px;
+      padding: 16px 18px;
+      background: linear-gradient(180deg, #f7fbff 0%, #f0f8f6 100%);
+    }
+    .note {
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      margin-top: 24px;
+      font-size: 14px;
+    }
+    @media (max-width: 720px) {
+      .cta-row, .grid { grid-template-columns: 1fr; }
+      .hero, .section { padding: 22px 18px; border-radius: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div class="badge">שיעורים פרטיים • הדרכות • חוגים • סדנאות טכנולוגיות</div>
+      <h1>יעקב טלבי<br>פתרונות ידע והנדסה</h1>
+      <p class="subtitle">
+      <p>מורה בכיר בעל רישיון הוראה  , מהנדס אלקטרוניקה ומדעים מדוייקים , הנדסאי אלקטרוניקה עם התמחות במיקרו-בקרים .</p>
+        מציע שיעורים פרטיים במתמטיקה, מחשבים ואלקטרוניקה, לצד סדנאות טכנולוגיות מעשיות לבתי ספר ומתנס"ים, חוגים ושירותי הדרכה לחברות טכנולוגיות .
+      </p>
+      <div class="cta-row">
+        <a class="btn primary" href="https://wa.me/972502743743?text=שלום%20יעקב,%20אשמח%20לקבל%20פרטים%20על%20שיעור%20או%20פעילות%20טכנולוגית">📲 פנייה בוואטסאפ</a>
+        <a class="btn green" href="mailto:Jackj990@gmail.com?subject=פנייה%20בנושא%20שיעורים%20או%20סדנה">✉️ פנייה במייל</a>
+        <a class="btn" href="#private-lessons">📘 שיעורים פרטיים</a>
+        <a class="btn" href="#workshops">🛠️ סדנאות טכנולוגיות</a>
+      </div>
+      <p class="note">© יעקב טלבי – פתרונות ידע והנדסה</p>
+    </section>
+
+    <section class="section" id="private-lessons">
+      <h2>שיעורים פרטיים</h2>
+      <p>
+        ליווי אישי לתלמידים בחטיבת הביניים ובתיכון, עם דגש על חיזוק יסודות, הבנה הדרגתית,
+        פתרון תרגילים, הכנה למבחנים ובניית ביטחון עצמי.
+      </p>
+      <div class="grid">
+        <div class="service">
+          <h3>מתמטיקה 3 יח"ל</h3>
+          <p>חיזוק ידע, פונקציות, גרפים, משוואות, סדרות, גאומטריה אנליטית והכנה לבגרות.</p>
+        </div>
+        <div class="service">
+          <h3>מחשבים ותכנות</h3>
+          <p>Python, C#, מבוא למדעי המחשב, לולאות, תנאים, רשימות, מחלקות וחשיבה אלגוריתמית.</p>
+        </div>
+        <div class="service">
+          <h3>אלקטרוניקה וחשמל</h3>
+          <p>מעגלי DC/AC, נגדים, קבלים, סלילים, Arduino, חיישנים, מערכות ספרתיות ופרויקטים מעשיים.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workshops">
+      <h2>סדנאות ופעילויות טכנולוגיות</h2>
+      <p>
+        פעילות מעשית לבתי ספר, מרכזי העשרה, חוגים, קייטנות וחברות בתחום הטכנולוגיה.
+        ניתן להתאים את הפעילות לגיל, לרמה ולמסגרת הזמן.
+      </p>
+      <ul>
+        <li>סדנת הלחמה בסיסית ובטיחות בעבודה עם תחנת הלחמה.</li>
+        <li>בניית קיט אלקטרוני פשוט: LED, נגד, חיווט ובדיקה.</li>
+        <li>מבוא ל־Arduino, חיישנים וכניסות/יציאות.</li>
+        <li>מבוא לרחפנים ולהנדסה יישומית.</li>
+        <li>סדנת תכנות למתחילים ב־Python או C#.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>איך מתחילים?</h2>
+      <div class="steps">
+        <div class="step"><strong>1. שולחים הודעה קצרה</strong><br>כותבים מה הצורך: שיעור פרטי, הכנה למבחן, סדנה או שיתוף פעולה.</div>
+        <div class="step"><strong>2. מתאימים מסלול</strong><br>נבדוק את רמת התלמיד, המטרה, לוח הזמנים והחומר הנדרש.</div>
+        <div class="step"><strong>3. יוצאים לדרך</strong><br>שיעור ניסיון / מפגש היכרות / בניית הצעת פעילות למסגרת חינוכית.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>למי זה מתאים?</h2>
+      <ul>
+        <li>תלמידים שצריכים חיזוק במתמטיקה 3 יח"ל.</li>
+        <li>תלמידי אלקטרוניקה, חשמל ומחשבים בכיתות ט'–י"ב.</li>
+        <li>הורים שמחפשים מורה מנוסה עם גישה מסודרת וסבלנית.</li>
+        <li>חברות חוגים, בתי ספר ומתנ"סים המחפשים מדריך טכנולוגי מנוסה.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>פרטי קשר</h2>
+      <p>
+          📲 וואטסאפ: 050-2743743<br>
+          ✉️ מייל: Jackj990@gmail.com<br>
+          📍 אזור פעילות: גוש דן והמרכז / אפשרות לשיעורים מקוונים<br>
+          🔗 דף נחיתה: <a href="https://canva.link/miz8zn3d8m9qhcq" target="_blank">לחץ כאן לצפייה</a>
+      </p>
+      <p class="note">
+          
+      </p>
+    </section>
+
+    <div class="footer">
+      © יעקב טלבי – פתרונות ידע והנדסה
+    </div>
+  </main>
+</body>
+</html>
